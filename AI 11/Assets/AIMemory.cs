@@ -58,13 +58,16 @@ public class AIMemory : MonoBehaviour {
             {
                 Cube.transform.position = entry.position;
 
-                Output.text = "BLACBOARD";
+                Output.text = "BLACKBOARD:";
+                Output.text += "\n\tTime: " + (Time.time - entry.timestamp).ToString();
+                Output.text += "\n\tPosition: " + entry.position.ToString();
             }
             else
             {
                 Cube.transform.position = player.transform.position;
 
-                Output.text = "Time: " + (Time.time - entry.timestamp).ToString();
+                Output.text = "BLACKBOARD:";
+                Output.text += "\n\tPosition: " + player.transform.position.ToString();
             }
         }
         else
@@ -89,6 +92,7 @@ public class AIMemory : MonoBehaviour {
             {
                 entry = new BlackboardEntry(ev.go, ev.go.transform.position);
                 memory.Add("blackboard", entry);
+                entry.is_inmemory = false;
             }
         }
         else if (ev.type == global::PerceptionEvent.types.LOST)
