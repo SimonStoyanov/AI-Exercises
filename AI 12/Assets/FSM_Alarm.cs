@@ -10,6 +10,8 @@ public class FSM_Alarm : MonoBehaviour {
     public GameObject alarm;
     public BansheeGz.BGSpline.Curve.BGCurve path;
 
+    private bool runcoroutine = true;
+
     void OnTriggerEnter(Collider other)
     {
         if(other.gameObject == alarm)
@@ -28,12 +30,19 @@ public class FSM_Alarm : MonoBehaviour {
     // TODO 1: Create a coroutine that executes 20 times per second
     // and goes forever. Make sure to trigger it from Start()
 
+
     // Use this for initialization
     void Start()
     {
-
+        StartCoroutine(CoroutineExample());
     }
 
+    IEnumerator CoroutineExample()
+    {       
+        yield return new WaitForSeconds(1.0f/20);
+        Debug.Log(Time.time);
+        StartCoroutine(CoroutineExample());
+    }
 
     // TODO 2: If player is spotted, jump to another coroutine that should
     // execute 20 times per second waiting for the player to reach the alarm
